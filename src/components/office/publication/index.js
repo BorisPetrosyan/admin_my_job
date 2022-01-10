@@ -55,7 +55,7 @@ const Publication = (props) => {
 
     const onChangeStatus = useCallback(
         (props) => async (e) => {
-            console.log(props.original.id)
+            console.log(props.original._id)
             e.stopPropagation();
         },
         []
@@ -200,11 +200,15 @@ const Publication = (props) => {
               pageCount={glossary ? glossary.totalPages : 0}
               getRowProps={({ original }) => {
                 return {
-                  onClick: () =>
-                    history.push("/publications/info/" + original._id, {
-                        publication: original,
-                      lang
-                    }),
+                  onClick: (e) =>
+                  {
+                   if(e.target.className !== 'public-switcher' && e.target.className !== 'settings-check' && e.target.cellIndex !== 5) {
+                       history.push("/publications/info/" + original._id, {
+                           publication: original,
+                           lang
+                       })
+                   }
+                  }
                 };
               }}
             />
