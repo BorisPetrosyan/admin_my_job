@@ -9,7 +9,7 @@ import CONSTANTS from "./constants";
 
 const PublicationsEdit = (props) => {
   const { history } = props;
-  console.log(props.location.state.publication)
+  console.log(props.location)
   const { _id } = props.location.state.publication
     ? props.location.state.publication
     : null;
@@ -144,11 +144,12 @@ const PublicationsEdit = (props) => {
               </div>
               <div className="input-group">
                 <div className='public-switcher' >
-                  <div className="label">{`${CONSTANTS[lang].turnOnOff} ${CONSTANTS[lang].publication}` }</div>
+
+                  <div className="label pl-0">{`${CONSTANTS[lang].turnOnOff} ${CONSTANTS[lang].publication}` }</div>
                   <input
                       className="settings-check"
                       type="checkbox"
-                      defaultChecked={publication.isActive}
+                      defaultChecked={props.location.pathname === "/publications/add" ? true : publication.isActive}
                       onChange={(e) => changeInput("isActive", !publication.isActive)}
                   />
                   <label/>

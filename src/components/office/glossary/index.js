@@ -21,6 +21,7 @@ const Glossary = (props) => {
   });
   const dispatch = useDispatch();
   const glossary = useSelector((store) => store.glossary.from_page);
+
   console.log("history", props, glossary);
 
   const deleteGlossary = async () => {

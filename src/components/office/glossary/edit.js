@@ -12,6 +12,7 @@ const GlossaryEdit = (props) => {
   const { _id } = props.location.state.glossary
     ? props.location.state.glossary
     : null;
+  console.log(props)
   const {
     location: { state },
   } = props;

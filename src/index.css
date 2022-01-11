@@ -463,6 +463,10 @@ nav .diagnostic_menu a{
 	bottom: -1px;
 	position: relative;
 }
+
+.pl-0 {
+	padding-left:  0!important ;
+}
 .public-switcher > .settings-check+label{
 	cursor:pointer;
 
