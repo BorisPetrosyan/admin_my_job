@@ -199,6 +199,7 @@ const Publication = (props) => {
               total={data ? data.length : 0}
               pageCount={glossary ? glossary.totalPages : 0}
               getRowProps={({ original }) => {
+<<<<<<< HEAD
                   return {
                       onClick: (e) =>
                       {
@@ -210,6 +211,19 @@ const Publication = (props) => {
                           }
                       }
                   };
+=======
+                return {
+                  onClick: (e) =>
+                  {
+                   if(e.target.className !== 'public-switcher' && e.target.className !== 'settings-check' && e.target.cellIndex !== 5) {
+                       history.push("/publications/info/" + original._id, {
+                           publication: original,
+                           lang
+                       })
+                   }
+                  }
+                };
+>>>>>>> 9fe8bbf7b164b6ac16d33aada42978ddbb70d5e5
               }}
             />
           </Styles>
