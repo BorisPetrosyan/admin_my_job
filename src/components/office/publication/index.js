@@ -15,17 +15,17 @@ import CONSTANTS from "./constants";
 const Publication = (props) => {
 
   const [data, setData] = useState(
-      [{"_id":1,"name":"Meejo","author":"Tatiania","subject":"Plumbing & Medical Gas","add_date":"07/23/2021","isActive":true,"file":"DonecPharetraMagna.tiff"},
-        {"_id":2,"name":"Avavee","author":"Mattie","subject":"Hard Tile & Stone","add_date":"02/11/2021","isActive":true,"file":"LiberoNullam.doc"},
-        {"_id":3,"name":"Kazu","author":"Harmonia","subject":"Marlite Panels (FED)","add_date":"03/09/2021","isActive":true,"file":"Metus.ppt"},
-        {"_id":4,"name":"Yata","author":"Chev","subject":"Prefabricated Aluminum Metal Canopies","add_date":"02/18/2021","isActive":true,"file":"BlanditNamNulla.doc"},
-        {"_id":5,"name":"Twitterbridge","author":"Zach","subject":"Soft Flooring and Base","add_date":"04/11/2021","isActive":true,"file":"UtDolor.mp3"},
-        {"_id":6,"name":"Zoonoodle","author":"Sherri","subject":"Masonry","add_date":"05/12/2021","isActive":true,"file":"In.jpeg"},
-        {"_id":7,"name":"Zooxo","author":"Cloe","subject":"Construction Clean and Final Clean","add_date":"01/26/2021","isActive":true,"file":"PosuereCubilia.png"},
-        {"_id":8,"name":"Yata","author":"Moselle","subject":"Masonry","add_date":"02/08/2021","isActive":false,"file":"SapienDignissimVestibulum.avi"},
-        {"_id":9,"name":"Voomm","author":"Jelene","subject":"Ornamental Railings","add_date":"09/20/2021","isActive":true,"file":"Consequat.gif"},
-        {"_id":10,"name":"Flashpoint","author":"Tammara","subject":"Waterproofing & Caulking","add_date":"08/02/2021","isActive":true,"file":"In.xls"},
-        {"_id":11,"name":"Twinte","author":"Griffy","subject":"EIFS","add_date":"12/04/2021","isActive":true,"file":"Hac.mpeg"},]);
+      [{"_id":1,"name_en":"Meejo","name_ru":"Миджо","author_en":"Tatiania","author_ru":"Татьяна","subject_en":"Plumbing & Medical Gas","subject_ru":"Сантехника и медицинский газ","add_date":"07/23/2021","isActive":true,"file":"DonecPharetraMagna.tiff"},
+        {"_id":2,"name_en":"Avavee","name_ru":"Авави","author_en":"Mattie","author_ru":"Мэтти","subject_en":"Hard Tile & Stone","subject_ru":"Жесткая плитка и камень","add_date":"02/11/2021","isActive":true,"file":"LiberoNullam.doc"},
+        {"_id":3,"name_en":"Kazu","name_ru":"Кадзу","author_en":"Harmonia","author_ru":"Гармония","subject_en":"Marlite Panels (FED)","subject_ru":"Марлитовые панели (ФЭД)","add_date":"03/09/2021","isActive":true,"file":"Metus.ppt"},
+        {"_id":4,"name_en":"Yata","name_ru":"Ята","author_en":"Chev","author_ru":"Чев","subject_en":"Prefabricated Aluminum Metal Canopies","subject_ru":"Сборные алюминиевые металлические навесы","add_date":"02/18/2021","isActive":true,"file":"BlanditNamNulla.doc"},
+        {"_id":5,"name_en":"Twitterbridge","name_ru":"Твиттербридж","author_en":"Zach","author_ru":"Зак","subject_en":"Soft Flooring and Base","subject_ru":"Мягкий пол и основание","add_date":"04/11/2021","isActive":true,"file":"UtDolor.mp3"},
+        {"_id":6,"name_en":"Zoonoodle","name_ru":"Зунудл","author_en":"Sherri","author_ru":"Шерри","subject_en":"Masonry","subject_ru":"Каменная кладка","add_date":"05/12/2021","isActive":true,"file":"In.jpeg"},
+        {"_id":7,"name_en":"Zooxo","name_ru":"Зооксо","author_en":"Cloe","author_ru":"Хлоя","subject_en":"Construction Clean and Final Clean","subject_ru":"Строительная уборка и окончательная уборка","add_date":"01/26/2021","isActive":true,"file":"PosuereCubilia.png"},
+        {"_id":8,"name_en":"Yata","name_ru":"Ята","author_en":"Moselle","author_ru":"Мозель","subject_en":"Masonry","subject_ru":"Каменная кладка","add_date":"02/08/2021","isActive":false,"file":"SapienDignissimVestibulum.avi"},
+        {"_id":9,"name_en":"Voomm","name_ru":"Воомм","author_en":"Jelene","author_ru":"Джелен","subject_en":"Ornamental Railings","subject_ru":"Декоративные перила","add_date":"09/20/2021","isActive":true,"file":"Consequat.gif"},
+        {"_id":10,"name_en":"Flashpoint","name_ru":"Точка возгорания","author_en":"Tammara","author_ru":"Таммара","subject_en":"Waterproofing & Caulking","subject_ru":"Гидроизоляция и уплотнение","add_date":"08/02/2021","isActive":true,"file":"In.xls"},
+        {"_id":11,"name_en":"Twinte","name_ru":"Твинте","author_en":"Griffy","author_ru":"Гриффи","subject_en":"EIFS","subject_ru":"Сантехника и медицинский газ","add_date":"12/04/2021","isActive":true,"file":"Hac.mpeg"},]);
 
   const { history, lang, setLang } = props;
   const [openModal, setOpenModal] = useState(false);
@@ -55,7 +55,7 @@ const Publication = (props) => {
 
     const onChangeStatus = useCallback(
         (props) => async (e) => {
-            console.log(props.original.id)
+            console.log(props.original._id)
             e.stopPropagation();
         },
         []
@@ -76,20 +76,20 @@ const Publication = (props) => {
       {
         Header: CONSTANTS[lang].name,
         id: "name",
-        accessor: `name`,
+        accessor: `name_${lang}`,
       },
       {
         Header: CONSTANTS[lang].author,
         id: "author",
-        accessor: `author`,
+        accessor: `author_${lang}`,
       },
       {
         Header: CONSTANTS[lang].subject,
         id: "text",
-        accessor: `subject`,
+        accessor: `subject_${lang}`,
       },
       {
-        Header: CONSTANTS[lang].addDate,
+        Header: CONSTANTS[lang].date_add,
         id: "addDate",
         accessor: "add_date",
 
@@ -199,13 +199,17 @@ const Publication = (props) => {
               total={data ? data.length : 0}
               pageCount={glossary ? glossary.totalPages : 0}
               getRowProps={({ original }) => {
-                return {
-                  onClick: () =>
-                    history.push("/publications/info/" + original._id, {
-                        publication: original,
-                      lang
-                    }),
-                };
+                  return {
+                      onClick: (e) =>
+                      {
+                          if(e.target.className !== 'public-switcher' && e.target.className !== 'settings-check' && e.target.cellIndex !== 5) {
+                              history.push("/publications/info/" + original._id, {
+                                  publication: original,
+                                  lang
+                              })
+                          }
+                      }
+                  };
               }}
             />
           </Styles>

@@ -52,48 +52,60 @@ function PublicationsInfo(props) {
             className="delete-btn"
           />
         </div>
+        <div className="sub-title">{CONSTANTS[lang].data}</div>
+
         <div className="row">
           <div className="col-4">
+
             <div className="profile-item">
-              <div className="sub-title">{CONSTANTS[lang].data}</div>
+              <div>
               <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].ingredient} ${CONSTANTS[lang].inEn}`}</div>
+                <div className="profile-item__list-title">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inEn}`}</div>
                 <div className="profile-item__list-value">
-                  {publication.ingredient_en}
+                  {publication.name_en}
                 </div>
               </div>
               <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].ingredient} ${CONSTANTS[lang].inRu}`}</div>
+                <div className="profile-item__list-title">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inRu}`}</div>
                 <div className="profile-item__list-value">
-                  {publication.ingredient_ru}
+                  {publication.name_ru}
                 </div>
               </div>
+
               <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].text} ${CONSTANTS[lang].inEn}`}</div>
-                <div className="profile-item__list-value">{publication.text_en}</div>
-              </div>
-              <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].text} ${CONSTANTS[lang].inRu}`}</div>
-                <div className="profile-item__list-value">{publication.text_ru}</div>
-              </div>
-              <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].section} ${CONSTANTS[lang].inEn}`}</div>
+                <div className="profile-item__list-title">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inRu}`}</div>
                 <div className="profile-item__list-value">
-                  {publication.section_en}
-                </div>
+                  {publication.author_ru}</div>
               </div>
               <div className="profile-item__list">
-                <div className="profile-item__list-title">{`${CONSTANTS[lang].section} ${CONSTANTS[lang].inRu}`}</div>
+                <div className="profile-item__list-title">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inEn}`}</div>
                 <div className="profile-item__list-value">
-                  {publication.section_ru}
+                  {publication.author_en}
                 </div>
               </div>
-              <div className="profile-item__list">
-                <div className="profile-item__list-title">
-                  {CONSTANTS[lang].literatureLink}
-                </div>
-                <div className="profile-item__list-value">{publication.link}</div>
               </div>
+
+          </div>
+
+          </div>
+          <div className="col-4">
+            <div className="profile-item__list">
+              <div className="profile-item__list-title">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inEn}`}</div>
+              <div className="profile-item__list-value">
+                {publication.subject_en}
+              </div>
+            </div>
+            <div className="profile-item__list">
+              <div className="profile-item__list-title">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inRu}`}</div>
+              <div className="profile-item__list-value">
+                {publication.subject_ru}
+              </div>
+            </div>
+            <div className="profile-item__list">
+              <div className="profile-item__list-title">
+                {CONSTANTS[lang].literatureLink}
+              </div>
+              <div className="profile-item__list-value">{publication.file}</div>
             </div>
           </div>
         </div>

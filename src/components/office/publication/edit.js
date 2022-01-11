@@ -24,7 +24,7 @@ const PublicationsEdit = (props) => {
     subject_en: "",
     subject_ru: "",
     date_add: "",
-    is_active: "",
+    isActive: "",
     file_upload: {},
   };
 
@@ -34,6 +34,7 @@ const PublicationsEdit = (props) => {
   console.log(publication)
   const lang = state?.lang || 'ru';
   const changeInput = (field, value) => {
+    console.log(field, value)
     let publicationValues = { ...publication };
     publicationValues[field] = value;
     setPublication(publicationValues);
@@ -72,17 +73,19 @@ const PublicationsEdit = (props) => {
 
 
   const saveEvent = state.publication.docs ? createPublication : savePublication;
-  // console.log(saveEvent)
+   console.log(saveEvent)
   return (
     <div className="content content-profile">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-4">
-            <div className="form-photo">              
+          <div className="container-fluid">
+            <div className="form-photo ">
             </div>
-            <form className="form" id="form-add">
+            <div className="sub-title">{`${CONSTANTS[lang].header_edit}`}</div>
+            <form className="form row " id="form-add">
+              <div className="col-4">
               <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].ingredient} ${CONSTANTS[lang].inEn}`}</div>
+                <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inEn}`}</div>
                 <input
                   type="text"
                   className="input-text"
@@ -91,58 +94,73 @@ const PublicationsEdit = (props) => {
                 />
               </div>
               <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].ingredient} ${CONSTANTS[lang].inRu}`}</div>
+                <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inRu}`}</div>
                 <input
                   type="text"
                   className="input-text"
-                  value={publication.ingredient_ru}
-                  onChange={(e) => changeInput("ingredient_ru", e.target.value)}
+                  value={publication.name_ru}
+                  onChange={(e) => changeInput("name_ru", e.target.value)}
                 />
               </div>
               <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].text} ${CONSTANTS[lang].inEn}`}</div>
-                <textarea
-                  type="textarea"
-                  className="input-text"
-                  value={publication.text_en}
-                  onChange={(e) => changeInput("text_en", e.target.value)}
-                />
-              </div>
-              <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].text} ${CONSTANTS[lang].inRu}`}</div>
-                <textarea
-                  type="textarea"
-                  className="input-text"
-                  value={publication.text_ru}
-                  onChange={(e) => changeInput("text_ru", e.target.value)}
-                />
-              </div>
-              <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].section} ${CONSTANTS[lang].inEn}`}</div>
+                <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inEn}`}</div>
                 <input
-                  type="text"
+                    type="text"
                   className="input-text"
-                  value={publication.section_en}
+                  value={publication.author_en}
+                  onChange={(e) => changeInput("author_en", e.target.value)}
+                />
+              </div>
+              <div className="input-group">
+                <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inRu}`}</div>
+                <input
+                    type="text"
+                  className="input-text"
+                  value={publication.author_ru}
+                  onChange={(e) => changeInput("author_ru", e.target.value)}
+                />
+              </div>
+              </div>
+              <div className="col-4">
+              <div className="input-group">
+                <div className="label">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inEn}`}</div>
+                <textarea
+                    type="textarea"
+                  className="input-text"
+                  value={publication.subject_en}
                   onChange={(e) => changeInput("section_en", e.target.value)}
                 />
               </div>
               <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].section} ${CONSTANTS[lang].inRu}`}</div>
-                <input
-                  type="text"
+                <div className="label">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inRu}`}</div>
+                <textarea
+                    type="textarea"
                   className="input-text"
-                  value={publication.section_ru}
+                  value={publication.subject_ru}
                   onChange={(e) => changeInput("section_ru", e.target.value)}
                 />
               </div>
+
+              </div>
               <div className="input-group">
-                <div className="label">{CONSTANTS[lang].literatureLink}</div>
-                <input
-                  type="text"
-                  className="input-text"
-                  value={publication.link}
-                  onChange={(e) => changeInput("link", e.target.value)}
-                />
+                <div className='public-switcher' >
+                  <div className="label">{`${CONSTANTS[lang].turnOnOff} ${CONSTANTS[lang].publication}` }</div>
+                  <input
+                      className="settings-check"
+                      type="checkbox"
+                      defaultChecked={publication.isActive}
+                      onChange={(e) => changeInput("isActive", !publication.isActive)}
+                  />
+                  <label/>
+
+                </div>
+                {/*<div className="label">{CONSTANTS[lang].literatureLink}</div>*/}
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    className="input-text"*/}
+                {/*    value={publication.link}*/}
+                {/*    onChange={(e) => changeInput("link", e.target.value)}*/}
+                {/*/>*/}
               </div>
             </form>
           </div>
