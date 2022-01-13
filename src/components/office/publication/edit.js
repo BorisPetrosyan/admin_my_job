@@ -10,28 +10,13 @@ import {generateModelForRequest} from "../../../utils/util";
 
 const PublicationsEdit = (props) => {
   const { history } = props;
-  // console.log(props.location)
   const { _id } = props.location.state.publication
     ? props.location.state.publication
     : null;
   const {
-    location: { state },
+    location: {state, state: {publication}},
   } = props;
-  let newPublication = {
-    name_en: "",
-    name_ru: "",
-    author_en: "",
-    author_ru: "",
-    subject_en: "",
-    subject_ru: "",
-    date_add: "",
-    isActive: "",
-    file_upload: {},
-  };
 
-  const [publication, setPublication] = useState(
-    state.publication.docs ? newPublication : state.publication
-  );
   const validationSchema = object().shape({
     name_en: string().required('Please enter a Name'),
     name_ru: string().required('Please enter a Name'),
@@ -53,7 +38,7 @@ const PublicationsEdit = (props) => {
 		setFieldValue,
 		touched
 	} = useFormik({
-		initialValues: newPublication,
+		initialValues: publication,
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: ({  name_en,
@@ -75,12 +60,12 @@ const PublicationsEdit = (props) => {
 	});
 
   const lang = state?.lang || 'ru';
-  const changeInput = (field, value) => {
-    console.log(field, value)
-    let publicationValues = { ...publication };
-    publicationValues[field] = value;
-    setPublication(publicationValues);
-  };
+  // const changeInput = (field, value) => {
+  //   console.log(field, value)
+  //   let publicationValues = { ...publication };
+  //   publicationValues[field] = value;
+  //   setPublication(publicationValues);
+  // };
   const cancel = (e) => {
     e.preventDefault();
     history.push("/publications");
@@ -138,6 +123,9 @@ const PublicationsEdit = (props) => {
                   value={values.name_en}
                   onChange={handleChange}
                 />
+                {errors.name_en && (
+                    <p className="invalid">{errors.name_en}</p>
+                )}
               </div>
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inRu}`}</div>
@@ -205,8 +193,8 @@ const PublicationsEdit = (props) => {
                   <input
                       className="settings-check"
                       type="checkbox"
-                      defaultChecked={props.location.pathname === "/publications/add" ? true : publication.isActive}
-                      onChange={(e) => changeInput("isActive", !publication.isActive)}
+                      // defaultChecked={props.location.pathname === "/publications/add" ? true : publication.isActive}
+                      // onChange={(e) => changeInput("isActive", !publication.isActive)}
                   />
                   <label/>
 

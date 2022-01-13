@@ -517,3 +517,16 @@ nav .diagnostic_menu a{
 	border-radius: 10px;
 	background: #b1b9c2;
 }
+.btn-confirm button {
+	height:50px;
+	display:inline-block;
+	color:#fff;
+	text-decoration:none;
+	line-height:50px;
+	padding:0 30px;
+	-webkit-border-radius:25px;
+	border-radius:25px;
+	margin-left:20px;
+	-webkit-transition:.35s ease;
+	-o-transition:.35s ease;
+	transition:.35s ease}
