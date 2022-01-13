@@ -529,4 +529,66 @@ nav .diagnostic_menu a{
 	margin-left:20px;
 	-webkit-transition:.35s ease;
 	-o-transition:.35s ease;
-	transition:.35s ease}
+	transition:.35s ease
+}
+
+.invalid-text {
+	color: #fc4949;
+	font-size: 13px;
+	padding-left: 12px;
+}
+
+.invalid-border {
+	border: 1px solid #fc4949!important;
+}
+
+.animated {
+	animation-duration: 400ms;
+	animation-fill-mode: both;
+}
+
+.animated.infinite {
+	animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+	animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+	animation-duration: .75s;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+.fadeIn {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+
+	to {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+}
+.fadeInDown {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown;
+}

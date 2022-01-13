@@ -27,6 +27,6 @@ export const generateModelForRequest = (
 	};
 };
 
-export  const getPairForBackend = (pair: Array<string>) : string => {
+export  const getPairForBackend = (pair)  => {
 	return `${pair[0].toLowerCase()}/${pair[1].toLowerCase()}`
 }

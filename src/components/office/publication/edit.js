@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import {number, object, string} from 'yup';
+import {boolean, number, object, string} from 'yup';
 import { t_create_glossary, t_save_glossary } from "../../../redux/tracks";
 
 import CONSTANTS from "./constants";
-import {generateModelForRequest} from "../../../utils/util";
 
 const PublicationsEdit = (props) => {
+
+
   const { history } = props;
   const { _id } = props.location.state.publication
     ? props.location.state.publication
@@ -16,15 +17,22 @@ const PublicationsEdit = (props) => {
   const {
     location: {state, state: {publication}},
   } = props;
+  const [checkInput, setCheckInput] = useState(publication ? publication.isActive : true )
+
+  const lang = state?.lang || 'ru';
 
   const validationSchema = object().shape({
-    name_en: string().required('Please enter a Name'),
-    name_ru: string().required('Please enter a Name'),
-    author_en:string().required('Please enter a Name'),
-    author_ru: string().required('Please enter a Name'),
-    subject_en:string().required('Please enter a Name'),
-    subject_ru: string().required('Please enter a Name'),
+    name_en: string().required(`${CONSTANTS[lang].nameValid}`),
+    name_ru: string().required(`${CONSTANTS[lang].nameValid}`),
+    author_en:string().required(`${CONSTANTS[lang].authorValid}`),
+    author_ru: string().required(`${CONSTANTS[lang].authorValid}`),
+    subject_en:string().required(`${CONSTANTS[lang].subjectValid}`),
+    subject_ru: string().required(`${CONSTANTS[lang].subjectValid}`),
+    isActive: boolean
   });
+
+
+
 
   const {
 		resetForm,
@@ -47,7 +55,8 @@ const PublicationsEdit = (props) => {
                      author_ru,
                      subject_en,
                      subject_ru,
-                     isActive, }) => createPublication(name_en,
+                     isActive,
+                   }) => createPublication(name_en,
             name_ru,
             author_en,
             author_ru,
@@ -59,7 +68,7 @@ const PublicationsEdit = (props) => {
 		validateOnMount: false,
 	});
 
-  const lang = state?.lang || 'ru';
+
   // const changeInput = (field, value) => {
   //   console.log(field, value)
   //   let publicationValues = { ...publication };
@@ -116,16 +125,14 @@ const PublicationsEdit = (props) => {
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inEn}`}</div>
                 <input
-                    id='name_en'
-                    name='name_en'
+                  id='name_en'
+                  name='name_en'
                   type="text"
-                  className="input-text"
+                  className={`input-text  ${errors.name_en ? 'invalid-border animated fadeIn': ''}`}
                   value={values.name_en}
                   onChange={handleChange}
                 />
-                {errors.name_en && (
-                    <p className="invalid">{errors.name_en}</p>
-                )}
+                {errors.name_en && <p className="invalid-text animated fadeInDown">{errors.name_en}</p>}
               </div>
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inRu}`}</div>
@@ -133,10 +140,11 @@ const PublicationsEdit = (props) => {
                   id='name_ru'
                   name='name_ru'
                   type="text"
-                  className="input-text"
+                  className={`input-text  ${errors.name_ru ? 'invalid-border animated fadeIn': ''}`}
                   value={values.name_ru}
                   onChange={handleChange}
                 />
+                {errors.name_ru && <p className="invalid-text animated fadeInDown">{errors.name_ru}</p>}
               </div>
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inEn}`}</div>
@@ -144,10 +152,11 @@ const PublicationsEdit = (props) => {
                     id='author_en'
                     name='author_en'
                     type="text"
-                  className="input-text"
+                    className={`input-text  ${errors.author_en ? 'invalid-border animated fadeIn': ''}`}
                   value={values.author_en}
                   onChange={handleChange}
                 />
+                {errors.author_en && <p className="invalid-text animated fadeInDown">{errors.author_en}</p>}
               </div>
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inRu}`}</div>
@@ -155,10 +164,11 @@ const PublicationsEdit = (props) => {
                     id='author_ru'
                     name='author_ru'
                     type="text"
-                  className="input-text"
+                    className={`input-text  ${errors.author_ru ? 'invalid-border animated fadeIn': ''}`}
                   value={values.author_ru}
                   onChange={handleChange}
                 />
+                {errors.author_ru && <p className="invalid-text animated fadeInDown">{errors.author_ru}</p>}
               </div>
               </div>
               <div className="col-4">
@@ -168,10 +178,11 @@ const PublicationsEdit = (props) => {
                     id='subject_en'
                     name='subject_en'
                     type="textarea"
-                  className="input-text"
+                    className={`input-text  ${errors.subject_en ? 'invalid-border animated fadeIn': ''}`}
                   value={values.subject_en}
                   onChange={handleChange}
                 />
+                {errors.subject_en && <p className="invalid-text animated fadeInDown">{errors.subject_en}</p>}
               </div>
               <div className="input-group">
                 <div className="label">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inRu}`}</div>
@@ -179,10 +190,11 @@ const PublicationsEdit = (props) => {
                     id='subject_ru'
                     name='subject_ru'
                     type="textarea"
-                  className="input-text"
+                    className={`input-text  ${errors.subject_ru ? 'invalid-border animated fadeIn': ''}`}
                   value={values.subject_ru}
                   onChange={handleChange}
                 />
+                {errors.subject_ru && <p className="invalid-text animated fadeInDown">{errors.subject_ru}</p>}
               </div>
 
               </div>
@@ -193,8 +205,8 @@ const PublicationsEdit = (props) => {
                   <input
                       className="settings-check"
                       type="checkbox"
-                      // defaultChecked={props.location.pathname === "/publications/add" ? true : publication.isActive}
-                      // onChange={(e) => changeInput("isActive", !publication.isActive)}
+                      defaultChecked={props.location.pathname === "/publications/add" ? true : checkInput}
+                       onChange={(e) => setCheckInput(!checkInput)}
                   />
                   <label/>
 
