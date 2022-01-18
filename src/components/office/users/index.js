@@ -18,7 +18,7 @@ const Users = (props) => {
     pageIndex: 0,
     pageSize: 100,
   });
-
+console.log(users)
   const columns = useMemo(
     () => [
       {

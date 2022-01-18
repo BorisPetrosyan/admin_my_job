@@ -49,6 +49,12 @@ thead tr th{
 .seminars__tabs .table__filter{
 	display: none;
 }
+.publication__tabs .table__search{
+	display: none;
+}
+.publication__tabs .table__filter{
+	display: none;
+}
 /* .seminars__tabs .pagination,
 .seminars__tabs .showing_result{
 	display: none;
@@ -467,6 +473,15 @@ nav .diagnostic_menu a{
 .pl-0 {
 	padding-left:  0!important ;
 }
+.pt-3 {
+	padding-top: 30px;
+}
+.m-left {
+	margin-left: auto
+}
+form .input-groups {
+	margin-bottom: 11px;
+}
 .public-switcher > .settings-check+label{
 	cursor:pointer;
 
@@ -534,12 +549,14 @@ nav .diagnostic_menu a{
 
 .invalid-text {
 	color: #fc4949;
-	font-size: 13px;
+	font-size: 11px;
 	padding-left: 12px;
+	float: right
 }
 
 .invalid-border {
 	border: 1px solid #fc4949!important;
+
 }
 
 .animated {

@@ -59,24 +59,6 @@ const DefaultColumnFilter = ({
 // Create a default prop getter
 const defaultPropGetter = () => ({});
 
-// const IndeterminateCheckbox = React.forwardRef(
-//     ({ indeterminate, ...rest }, ref) => {
-//       const defaultRef = React.useRef();
-//       const resolvedRef = ref || defaultRef;
-//
-//       React.useEffect(() => {
-//         resolvedRef.current.indeterminate = indeterminate;
-//       }, [resolvedRef, indeterminate]);
-//
-//       return (
-//           <div className='xs'>
-//               <label htmlFor="c_1"></label>
-//               <input ref={resolvedRef} {...rest} className="settings-check" type="checkbox" id="c_2"/>
-//             {/*<input type="checkbox" ref={resolvedRef} {...rest} />*/}
-//           </div>
-//       );
-//     }
-// );
 
 const Table = ({
   columns,
@@ -153,30 +135,7 @@ const Table = ({
     useSortBy,
     useExpanded,
     usePagination,
-      useRowSelect,
-      // hooks => {
-      //     hooks.visibleColumns.push(columns => [
-      //         // Let's make a column for selection
-      //         {
-      //             id: 'selection',
-      //             // The header can use the table's getToggleAllRowsSelectedProps method
-      //             // to render a checkbox
-      //             Header: ({ getToggleAllRowsSelectedProps }) => (
-      //                 <div>
-      //                     <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-      //                 </div>
-      //             ),
-      //             // The cell can use the individual row's getToggleRowSelectedProps method
-      //             // to the render a checkbox
-      //             Cell: ({ row }) => (
-      //                 <div>
-      //                     <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-      //                 </div>
-      //             ),
-      //         },
-      //         ...columns,
-      //     ])
-      // }
+    useRowSelect,
 
   );
 
