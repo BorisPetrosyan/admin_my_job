@@ -61,6 +61,7 @@ const defaultPropGetter = () => ({});
 
 
 const Table = ({
+  tableType,
   columns,
   data,
   pageCount: controlledPageCount,
@@ -179,10 +180,23 @@ const Table = ({
               />
             </th>
           </tr>
+
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}
+                    style={
+                      column.originalId === 'recommendedHeaderGreen' ? {color:"green",textAlign:'center'} :
+                      column.originalId === 'recommendedHeaderOrange' ? {color:"orange",textAlign:'center'} :
+                      column.originalId === 'recommendedHeaderRed' ? {color:"red",textAlign:'center'} :
+                      column.originalId === 'preparationsHeaderGreen' ? {color:"green",textAlign:'center'} :
+                      column.originalId === 'preparationsHeaderOrange' ? {color:"orange",textAlign:'center'} :
+                      column.originalId === 'preparationsHeaderRed' ? {color:"red",textAlign:'center'} :
+                      column.originalId === 'valueHeader'  ? {textAlign:"center"} : null
+                    }
+
+                >
                   {column.render("Header")}
                   <span>
                     {column.isSorted
@@ -214,7 +228,7 @@ const Table = ({
           })}
           <tr className="showing_result">
             {loading ? (
-              <td colSpan="10000">Loading...</td>
+              <td colSpan="10000" style={{color:"red"}}>Loading...</td>
             ) : (
               <td colSpan="10000">
                 Showing {page.length} of ~{" "}
