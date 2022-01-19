@@ -32,7 +32,7 @@ const GlobalFilter = ({
         placeholder={`${count} records...`}
         style={{
           fontSize: "1.1rem",
-          border: "0",
+          border: ' 1px solid #4a83fa!important'
         }}
       />
     </span>

@@ -50,6 +50,18 @@ export default {
     noVariants: "Нет вариантов",
   },
   en: {
+    valueHeader:'Meaning',
+    valueOne:'Min',
+    valueTwo:'Max',
+    recommendedHeaderGreen:'Green status recommendation',
+    recommendedHeaderOrange:'Orange status recommendation',
+    recommendedHeaderRed:'Red status recommendation',
+    young:'Young ',
+    old:'Adult ',
+    preparationsHeaderGreen:'Green Status Products',
+    preparationsHeaderOrange:'Orange Status Products',
+    preparationsHeaderRed:'Red Status Products',
+
     name: "Name",
     author: "Author",
     subject: "Subject",
