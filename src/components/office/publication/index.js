@@ -167,7 +167,7 @@ const Publication = (props) => {
 
 
   return (
-    <div className="seminars__tabs xs">
+    <div className="publication__tabs xs">
       {openModal && (
         <ModalConfirm
           title={CONSTANTS[lang].deleteTitle}

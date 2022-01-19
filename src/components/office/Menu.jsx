@@ -71,6 +71,11 @@ class Menu extends PureComponent {
 							Глоссарий
 						</NavLink>
 					</li>
+					<li>
+						<NavLink to="/axes" activeClassName="active">
+							Таблица Осей
+						</NavLink>
+					</li>
 					<li className="diagnostic_item">
 						<div className="diagnostic_link" onClick={this.handleToggleDiagnostics} >
 							Диагностика

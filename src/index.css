@@ -49,6 +49,12 @@ thead tr th{
 .seminars__tabs .table__filter{
 	display: none;
 }
+.publication__tabs .table__search{
+	display: none;
+}
+.publication__tabs .table__filter{
+	display: none;
+}
 /* .seminars__tabs .pagination,
 .seminars__tabs .showing_result{
 	display: none;
@@ -467,6 +473,15 @@ nav .diagnostic_menu a{
 .pl-0 {
 	padding-left:  0!important ;
 }
+.pt-3 {
+	padding-top: 30px;
+}
+.m-left {
+	margin-left: auto
+}
+form .input-groups {
+	margin-bottom: 11px;
+}
 .public-switcher > .settings-check+label{
 	cursor:pointer;
 
@@ -516,4 +531,81 @@ nav .diagnostic_menu a{
 	height: 15px;
 	border-radius: 10px;
 	background: #b1b9c2;
+}
+.btn-confirm button {
+	height:50px;
+	display:inline-block;
+	color:#fff;
+	text-decoration:none;
+	line-height:50px;
+	padding:0 30px;
+	-webkit-border-radius:25px;
+	border-radius:25px;
+	margin-left:20px;
+	-webkit-transition:.35s ease;
+	-o-transition:.35s ease;
+	transition:.35s ease
+}
+
+.invalid-text {
+	color: #fc4949;
+	font-size: 11px;
+	padding-left: 12px;
+	float: right
+}
+
+.invalid-border {
+	border: 1px solid #fc4949!important;
+
+}
+
+.animated {
+	animation-duration: 400ms;
+	animation-fill-mode: both;
+}
+
+.animated.infinite {
+	animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+	animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+	animation-duration: .75s;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+.fadeIn {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+
+	to {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+}
+.fadeInDown {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown;
 }

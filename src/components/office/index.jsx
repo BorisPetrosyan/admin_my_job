@@ -55,6 +55,7 @@ import {
   t_load_all_diagnostics,
   t_load_sections
 } from "../../redux/tracks";
+import Axes from "./axes";
 
 class Office extends PureComponent {
   constructor(props) {
@@ -184,6 +185,8 @@ class Office extends PureComponent {
             <Route path="/publications/edit/:id" component={PublicationsEdit} />
             <Route path="/publications/add" component={PublicationsEdit} />
 
+
+            <Route path="/axes" render={(props) => (<Axes {...props} lang={this.state.lang} setLang={setLang} />)} exact />
           </Switch>
         </div>
       </Fragment>

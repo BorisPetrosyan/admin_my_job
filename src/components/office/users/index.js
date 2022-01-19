@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback, Fragment } from "react";
+import React, {useState, useMemo, useRef, useCallback, Fragment, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -18,7 +18,6 @@ const Users = (props) => {
     pageIndex: 0,
     pageSize: 100,
   });
-
   const columns = useMemo(
     () => [
       {
@@ -118,13 +117,15 @@ const Users = (props) => {
       await dispatch(
         t_load_users_from_page({ page: pageIndex + 1, limit: pageSize })
       );
-      if (fetchId === fetchIdRef.current) {
-        setLoading(false);
-      }
+      // if (fetchId === fetchIdRef.current) {
+      //   setLoading(false);
+      // }
     },
     [dispatch]
   );
-
+    useEffect(() => {
+        if(users)setLoading(false)
+    },users)
   return (
     <div className="content">
       <div className="container-fluid">

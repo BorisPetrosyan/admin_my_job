@@ -8,8 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { t_create_glossary, t_save_glossary } from "../../../redux/tracks";
 
 import CONSTANTS from "./constants";
+import TableAxes from "./index";
 
-const PublicationsEdit = (props) => {
+
+const TableAxesEdit = (props) => {
   const { history } = props;
   const { _id } = props.location.state.publication
     ? props.location.state.publication
@@ -226,4 +228,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublicationsEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(TableAxes);

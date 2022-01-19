@@ -1,5 +1,16 @@
 export default {
   ru: {
+    valueHeader:'Значение',
+    valueOne:'Мин',
+    valueTwo:'Макс',
+    recommendedHeaderGreen:'Рекомендация зеленого статуса',
+    recommendedHeaderOrange:'Рекомендация оранжевого статуса',
+    recommendedHeaderRed:'Рекомендация красного статуса',
+    young:'Молодой ',
+    old:'Взрослый ',
+    preparationsHeaderGreen:'Препараты зеленого статуса',
+    preparationsHeaderOrange:'Препараты оранжевого статуса',
+    preparationsHeaderRed:'Препараты красного статуса',
     name: "Название",
     author: "Автор",
     subject: "Тематика",

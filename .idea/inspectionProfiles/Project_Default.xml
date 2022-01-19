@@ -1,7 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-<<<<<<< HEAD
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
@@ -12,8 +11,5 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
-=======
-    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
->>>>>>> 9fe8bbf7b164b6ac16d33aada42978ddbb70d5e5
   </profile>
 </component>
