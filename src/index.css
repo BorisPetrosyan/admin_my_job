@@ -551,7 +551,11 @@ form .input-groups {
 	color: #fc4949;
 	font-size: 11px;
 	padding-left: 12px;
-	float: right
+	float: right;
+}
+.inv-m {
+	margin-bottom: -1px;
+	margin-top: -11px;
 }
 
 .invalid-border {
@@ -608,4 +612,42 @@ form .input-groups {
 .fadeInDown {
 	-webkit-animation-name: fadeInDown;
 	animation-name: fadeInDown;
+}
+
+
+.row-f {
+	margin-right: -10px;
+	margin-left: -10px;
+}
+
+.flex-r {
+	display: flex;
+	justify-content: space-between;
+}
+
+.b-grey {
+	border: 0.1em solid darkgray;
+	padding: 12px;
+	margin-top: 30px;
+	border-radius: 2px;
+}
+.green {
+	border-bottom: 0.2em solid green;
+	padding: 12px;
+	border-radius: 1px;
+}
+.orange {
+	border-bottom: 0.2em solid orange;
+	padding: 12px;
+	border-radius: 1px;
+}
+
+.red {
+	border-bottom: 0.2em solid red;
+	padding: 12px;
+	border-radius: 1px;
+}
+
+.textarea-invalid {
+	outline: 1px solid red
 }

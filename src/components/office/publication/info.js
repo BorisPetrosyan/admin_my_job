@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { t_save_glossary, t_delete_glossary } from "../../../redux/tracks";
 import ModalConfirm from "../../common/ModalConfirm";
 import CONSTANTS from "./constants";
+import Lang from "../../service/Lang";
 
 const { REACT_APP_SERVER } = process.env;
 
@@ -17,7 +18,6 @@ function PublicationsInfo(props) {
   const publication = state?.publication;
   const lang = state?.lang || 'ru';
   const { _id } = publication;
-
   const del = () => {
     const {
       deleteGlossary,

@@ -56,6 +56,8 @@ import {
   t_load_sections
 } from "../../redux/tracks";
 import Axes from "./axes";
+import TableAxesEdit from "./axes/edit";
+import TableAxesEditInfo from "./axes/info";
 
 class Office extends PureComponent {
   constructor(props) {
@@ -187,6 +189,8 @@ class Office extends PureComponent {
 
 
             <Route path="/axes" render={(props) => (<Axes {...props} lang={this.state.lang} setLang={setLang} />)} exact />
+            <Route path="/axes/info/:id" component={TableAxesEditInfo} />
+            <Route path="/axes/edit/:id" component={TableAxesEdit} />
           </Switch>
         </div>
       </Fragment>

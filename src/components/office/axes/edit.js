@@ -9,12 +9,14 @@ import { t_create_glossary, t_save_glossary } from "../../../redux/tracks";
 
 import CONSTANTS from "./constants";
 import TableAxes from "./index";
+import Lang from "../../service/Lang";
+import LangForTab from "../../service/LangForTab";
 
 
 const TableAxesEdit = (props) => {
   const { history } = props;
-  const { _id } = props.location.state.publication
-    ? props.location.state.publication
+  const { _id } = props.location.state.axes
+    ? props.location.state.axes
     : null;
   const {
     location: {state, state: {publication }} ,
@@ -24,11 +26,11 @@ const TableAxesEdit = (props) => {
 
   const cancel = (e) => {
     e.preventDefault();
-    history.push("/publications");
+    history.push("/axes");
   };
   const savePublication = (e) => {
     e.preventDefault();
-    history.push("/publications");
+    history.push("/axes");
     // const { saveGlossary } = props;
     // saveGlossary(glossar);
   };
@@ -37,22 +39,18 @@ const TableAxesEdit = (props) => {
 
 
   const schema = yup.object({
-      name_en: yup.string().required(`${CONSTANTS[lang].nameValid}`),
-      name_ru: yup.string().required(`${CONSTANTS[lang].nameValid}`),
-      author_en:yup.string().required(`${CONSTANTS[lang].authorValid}`),
-      author_ru: yup.string().required(`${CONSTANTS[lang].authorValid}`),
-      subject_en:yup.string().required(`${CONSTANTS[lang].subjectValid}`),
-      subject_ru: yup.string().required(`${CONSTANTS[lang].subjectValid}`),
-      file: yup.mixed()
-        .test('required', CONSTANTS[lang].fileValid, (value) =>{
-          return value && value.length
-        } )
-        .test("fileSize", CONSTANTS[lang].fileMaxSizeValid, (value, context) => {
-          return value && value[0] && value[0].size <= 5000000;
-        })
-        .test("type", "We only support pdf", function (value) {
-          return value && value[0] && value[0].type === "application/pdf";
-        }),
+      rec_young_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_young_orange_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_orange_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_young_red_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_red_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_young_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_young_orange_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_orange_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_young_red_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      rec_old_red_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`)
   });
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema)
@@ -81,117 +79,167 @@ const TableAxesEdit = (props) => {
   //     toast.info("Не реализовано для создания пользователя");
   //   }
   // };
-
+  const [langTab,setLangTab] = useState('ru')
+  console.log(langTab)
   return (
     <div className="content content-profile">
+
+
       <div className="container-fluid">
         <div className="row">
           <div className="container-fluid">
-            <div className="form-photo ">
-            </div>
             <div className="sub-title">{`${CONSTANTS[lang].header_edit}`}</div>
-            <form className="form row " id="form-add" onSubmit={handleSubmit(onSubmit)}>
-              <div className="col-4">
-              <div className="input-groups">
-                <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inEn}`}</div>
-                <input
-                  defaultValue={publication?.name_en && publication?.name_en}
-                  name='name_en'
-                  type="text"
-                   className={`input-text  ${errors.name_en?.message  ? 'invalid-border animated fadeIn': ''}`}
-                  {...register('name_en')}
-                />
-                {errors.name_en?.message && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].nameValid}</p>}
-              </div>
-              <div className="input-groups">
-                <div className="label">{`${CONSTANTS[lang].name} ${CONSTANTS[lang].inRu}`}</div>
-                <input
-                  defaultValue={publication?.name_ru && publication?.name_ru}
-                  name='name_ru'
-                  type="text"
-                  className={`input-text  ${errors.name_ru?.message ? 'invalid-border animated fadeIn': ''}`}
-                  {...register('name_ru')}
-                />
-                {errors.name_ru?.message && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].nameValid}</p>}
-              </div>
-              <div className="input-groups">
-                <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inEn}`}</div>
-                <input
-                    defaultValue={publication?.author_en && publication?.author_en}
-                    id='author_en'
-                    name='author_en'
-                    type="text"
-                    className={`input-text  ${errors.author_en?.message   ? 'invalid-border animated fadeIn': ''}`}
-
-                    {...register('author_en')}
-                />
-                {errors.author_en?.message &&  <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].authorValid}</p>}
-              </div>
-              <div className="input-groups">
-                <div className="label">{`${CONSTANTS[lang].author} ${CONSTANTS[lang].inRu}`}</div>
-                <input
-                    defaultValue={publication?.author_ru && publication?.author_ru}
-                    id='author_ru'
-                    name='author_ru'
-                    type="text"
-                    className={`input-text  ${errors.author_ru?.message ? 'invalid-border animated fadeIn': ''}`}
-                    {...register('author_ru')}
-                />
-                {errors.author_ru?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].authorValid}</p>}
-              </div>
-              </div>
-              <div className="col-4">
-              <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inEn}`}</div>
+            <LangForTab active={langTab} onClick={setLangTab} lang={lang}/>
+            <form className="form row-f " id="form-add" onSubmit={handleSubmit(onSubmit)}>
+              <div className={`${langTab === 'en' ? 'd-none': 'd-flex'}  justify-content-between `} >
+              <div className="input-groups b-grey ">
+                <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                {errors.rec_young_green_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_green_ru?.message}</p></div>}
                 <textarea
                     defaultValue={publication?.subject_en && publication?.subject_en}
-                    id='subject_en'
-                    name='subject_en'
+                    id='rec_young_green_ru'
+                    name='rec_young_green_ru'
                     type="textarea"
-                    className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
-                   {...register('subject_en')}
+                    className={`input-text  ${errors.rec_young_green_ru?.message ? 'textarea-invalid animated fadeIn': ''}`}
+                    {...register('rec_young_green_ru')}
 
                 />
-                {errors.subject_en?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].subjectValid}</p>}
-              </div>
-              <div className="input-group">
-                <div className="label">{`${CONSTANTS[lang].subject} ${CONSTANTS[lang].inRu}`}</div>
+
+
+                <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                {errors.rec_old_green_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_green_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_ru && publication?.subject_ru}
-
-                    name='subject_ru'
+                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    id='rec_old_green_ru'
+                    name='rec_old_green_ru'
                     type="textarea"
-                    className={`input-text  ${errors.subject_ru?.message ? 'invalid-border animated fadeIn': ''}`}
-                    {...register('subject_ru')}
+                    className={`input-text  ${errors.rec_old_green_ru?.message ? 'invalid-border animated fadeIn': ''}`}
+                    {...register('rec_old_green_ru')}
 
                 />
-                {errors.subject_ru?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].subjectValid}</p>}
-              </div>
 
               </div>
-              <div className=" col-4">
-                <div className='public-switcher' >
-                  <div className="label pl-0">{`${CONSTANTS[lang].turnOnOff} ${CONSTANTS[lang].publication}` }</div>
-                  <input
-                      name='isActive'
-                      className="settings-check"
-                      type="checkbox"
-                      defaultChecked={props.location.pathname === "/publications/add" ? true : publication.isActive}
-                      {...register('isActive')}
+              <div className="input-groups b-grey ">
+                <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                {errors.rec_young_orange_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_orange_ru?.message}</p></div>}
+                <textarea
+                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    id='rec_young_orange_ru'
+                    name='rec_young_orange_ru'
+                    type="textarea"
+                    className={`input-text  ${errors.rec_young_orange_ru?.message ? 'textarea-invalid animated fadeIn': ''}`}
+                    {...register('rec_young_orange_ru')}
+
+                />
+                <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange}${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                 {errors.rec_old_orange_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_orange_ru?.message}</p></div>}
+                <textarea
+                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    id='rec_old_orange_ru'
+                    name='rec_old_orange_ru'
+                    type="textarea"
+                    className={`input-text  ${errors.rec_old_orange_ru?.message ? 'textarea-invalid animated fadeIn': ''}`}
+                    {...register('rec_old_orange_ru')}
+                />
+              </div>
+              <div className="input-groups b-grey " >
+                <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                    {errors.rec_young_red_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_red_ru?.message}</p></div>}
+                <textarea
+                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    id='rec_young_red_ru'
+                    name='rec_young_red_ru'
+                    type="textarea"
+                    className={`input-text  ${errors.rec_young_red_ru?.message ? 'invalid-border animated fadeIn': ''}`}
+                    {...register('rec_young_red_ru')}
+
+                />
+                <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                  {errors.rec_old_red_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_red_ru?.message}</p></div>}
+                <textarea
+                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    id='rec_old_red_ru'
+                    name='rec_old_red_ru'
+                    type="textarea"
+                    className={`input-text  ${errors.rec_old_red_ru?.message ? 'invalid-border animated fadeIn': ''}`}
+                    {...register('rec_old_red_ru')}
+
+                />
+              </div>
+              </div>
+              <div className={` ${langTab === 'ru' ? 'd-none': 'd-flex'}  justify-content-between `}  >
+                <div className="input-groups b-grey ">
+                  <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_young_green_en'
+                      name='rec_young_green_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_young_green_en')}
+
                   />
-                  <label/>
-                </div>
-                <div className="label pl-0 pt-3">{CONSTANTS[lang].literatureLink}</div>
-                <input
-                    name='file'
-                    type="file"
-                    className="input-text"
-                    accept='.pdf'
-                    {...register('file')}
+                  {errors.subject_en?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].subjectValid}</p>}
+                  <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_old_green_en'
+                      name='rec_old_green_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_old_green_en')}
 
-                />
-                {errors.file?.type === 'required' && <p className="invalid-text animated fadeInDown">{errors.file?.message}</p>}
-                {errors.file?.type === 'fileSize' && <p className="invalid-text animated fadeInDown">{errors.file?.message}</p>}
+                  />
+                  {errors.subject_en?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].subjectValid}</p>}
+                </div>
+                <div className="input-groups b-grey ">
+                  <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_young_orange_en'
+                      name='rec_young_orange_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_young_orange_en')}
+
+                  />
+                  {errors.name_ru?.message && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].nameValid}</p>}
+                  <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange}${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_old_orange_en'
+                      name='rec_old_orange_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_old_orange_en')}
+
+                  />
+                  {errors.name_ru?.message && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].nameValid}</p>}
+                </div>
+                <div className="input-groups b-grey " >
+                  <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_young_red_en'
+                      name='rec_young_red_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_young_red_en')}
+
+                  />
+                  {errors.author_en?.message &&  <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].authorValid}</p>}
+                  <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
+                  <textarea
+                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      id='rec_old_red_en'
+                      name='rec_old_red_en'
+                      type="textarea"
+                      className={`input-text  ${errors.subject_en?.message ? 'invalid-border animated fadeIn': ''}`}
+                      {...register('rec_old_red_en')}
+
+                  />
+                  {errors.author_ru?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].authorValid}</p>}
+                </div>
               </div>
               <div className="btn-confirm m-left">
                 <a onClick={(e) => cancel(e)} href="#!" className="btn-confirm__cancel">
@@ -228,4 +276,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableAxes);
+export default connect(mapStateToProps, mapDispatchToProps)(TableAxesEdit);

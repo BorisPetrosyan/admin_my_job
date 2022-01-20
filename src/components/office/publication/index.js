@@ -191,6 +191,7 @@ const Publication = (props) => {
           <Styles>
 
             <ReactTable
+              headerText={CONSTANTS[lang].listOf}
               columns={columns}
               data={data ? data : []}
               fetchData={fetchData}

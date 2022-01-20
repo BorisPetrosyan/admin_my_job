@@ -1,5 +1,6 @@
 export default {
   ru: {
+    listOf:'Список публикаций',
     name: "Название",
     author: "Автор",
     subject: "Тематика",
@@ -20,7 +21,7 @@ export default {
     picture: "Картинка",
     data: "Информация о Публикации",
     text: "Текст",
-    literatureLink: "Ссылка на литературу",
+    literatureLink: "Ссылка на PDF",
     question: "Вопрос",
     variants: "Варианты",
     answerVariants: "Вариант ответа",
@@ -39,6 +40,7 @@ export default {
     noVariants: "Нет вариантов",
   },
   en: {
+    listOf : 'List of publications',
     name: "Name",
     author: "Author",
     subject: "Subject",
@@ -59,7 +61,7 @@ export default {
     picture: "Picture",
     data: "Publication Information",
     text: "Text",
-    literatureLink: "Literature link",
+    literatureLink: "link PDF",
     question: "Question",
     variants: "Variants",
     answerVariants: "Possible answer",

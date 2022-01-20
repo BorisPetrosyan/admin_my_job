@@ -61,6 +61,7 @@ const defaultPropGetter = () => ({});
 
 
 const Table = ({
+  headerText= 'Показывать колонки:',
   tableType,
   columns,
   data,
@@ -151,7 +152,7 @@ const Table = ({
 
   return (
     <div>
-      <span className="hide_for_diagnostics">Показывать колонки:&nbsp;</span>
+      <span className="hide_for_diagnostics">{headerText}&nbsp;</span>
 
       {flatColumns?.map((column) => (
 
