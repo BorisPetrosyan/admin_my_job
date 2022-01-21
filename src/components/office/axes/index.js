@@ -8,6 +8,7 @@ import ReactTable from "../../common/ReactTable";
 import Lang from "../../service/Lang";
 import ModalConfirm from "../../common/ModalConfirm";
 import CONSTANTS from "./constants";
+import ToolTip from "./bxk";
 
 // const { REACT_APP_SERVER } = process.env;
 
@@ -15,8 +16,8 @@ import CONSTANTS from "./constants";
 const TableAxes = (props) => {
 
     const [data, setData] = useState(
-        [{"_id":1,"_axes":"Оксидативный стресс",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
-            {"_id":2,"_axes":"Антиоксидантный потенциал кожи",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
+        [{"_id":1,"_axes":"Оксидативный стресс",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho no ne tak kak nado Vse xorosho no ne tak kak nado Vse xorosho no ne tak kak nado Vse xorosho no ne tak kak nado ',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ochen ploxo',redEng:'all bad and bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
+            {"_id":2,"_axes":"Антиоксидантный потенциал кожи",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho ili es kokiti neznayu kak bo',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
             {"_id":3,"_axes":"Фотостарение",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
             {"_id":4,"_axes":"Дряблость кожи и деградация коллаге",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
             {"_id":5,"_axes":"Склонность к угрям",min:20,max:50, recommendation: {young:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'},old:{greenRu:'Vse xorosho',greenEng:'all is good',orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}},products:{young:{greenRu:['analgin,tempalgin'],greenEng:['engAnalgin','engTenpalgin'],orangeRu:'vse norme',orangeEng:'all normal bro', redRu:'vse ploxo',redEng:'all bad'}}},
@@ -38,7 +39,7 @@ const TableAxes = (props) => {
   const dispatch = useDispatch();
   const glossary = useSelector((store) => store.glossary.from_page);
   console.log("history", "props", glossary);
-
+    console.log(lang[0].toUpperCase())
   const deleteGlossary = async () => {
     await dispatch(t_delete_glossary({ id: delId }));
     setOpenModal(false);
@@ -61,7 +62,10 @@ const TableAxes = (props) => {
         },
         []
     );
-
+    const capitalizeFirstLetter = (string) => {
+        if(string === 'en') return  string.charAt(0).toUpperCase() + string.slice(1) + 'g';
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
   const columns = useMemo(
     () => [
       {
@@ -106,12 +110,12 @@ const TableAxes = (props) => {
                     style:'green',
                     Header: CONSTANTS[lang].young,
                     id: "recYoungGreen",
-                    // accessor: `subject_${lang}`,
+                    accessor: `recommendation.young.green${capitalizeFirstLetter(lang)}`,
                 },
                 {
                     Header: CONSTANTS[lang].old,
                     id: "recOldGreen",
-                    // accessor: "add_date",
+                    accessor: `recommendation.old.green${capitalizeFirstLetter(lang)}`,
 
                 }
             ]
@@ -124,12 +128,12 @@ const TableAxes = (props) => {
                 {
                     Header: CONSTANTS[lang].young,
                     id: "recYoungOrange",
-                    // accessor: `subject_${lang}`,
+                    accessor: `recommendation.young.orange${capitalizeFirstLetter(lang)}`,
                 },
                 {
                     Header: CONSTANTS[lang].old,
                     id: "recOldOrange",
-                    // accessor: "add_date",
+                    accessor: `recommendation.old.orange${capitalizeFirstLetter(lang)}`,
 
                 }
             ]
@@ -142,12 +146,12 @@ const TableAxes = (props) => {
                 {
                     Header: CONSTANTS[lang].young,
                     id: "recYoungRed",
-                    // accessor: `subject_${lang}`,
+                    accessor: `recommendation.young.red${capitalizeFirstLetter(lang)}`,
                 },
                 {
                     Header: CONSTANTS[lang].old,
                     id: "recOldRed",
-                    // accessor: "add_date",
+                    accessor: `recommendation.old.red${capitalizeFirstLetter(lang)}`,
 
                 }
             ]
@@ -265,9 +269,12 @@ const TableAxes = (props) => {
               getRowProps={({ original }) => {
                 return {
                   onClick: (e) =>
+
                   {
-                   if(e.target.className !== 'public-switcher' && e.target.className !== 'settings-check' && e.target.cellIndex !== 5) {
-                       history.push("/axes/info/" + original._id, {
+                      // console.log(e.target)
+                      if(e.target.cellIndex > 2 && e.target.cellIndex < 9){console.log(e.target)}
+                   if(e.target.className !== 'public-switcher' && e.target.className !== 'settings-check' && e.target.cellIndex !== 5 && e.target.cellIndex === 0) {
+                       history.push("/axes/edit/" + original._id, {
                            axes: original,
                            lang
                        })

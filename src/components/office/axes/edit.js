@@ -19,11 +19,11 @@ const TableAxesEdit = (props) => {
     ? props.location.state.axes
     : null;
   const {
-    location: {state, state: {publication }} ,
+    location: {state, state: {axes }} ,
   } = props;
 
   const lang = state?.lang || 'ru';
-
+  console.log(state)
   const cancel = (e) => {
     e.preventDefault();
     history.push("/axes");
@@ -39,18 +39,18 @@ const TableAxesEdit = (props) => {
 
 
   const schema = yup.object({
-      rec_young_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_young_orange_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_orange_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_young_red_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_red_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_young_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_young_orange_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_orange_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_young_red_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
-      rec_old_red_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`)
+      // rec_young_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_green_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_young_orange_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_orange_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_young_red_ru:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_red_ru: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_young_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_green_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_young_orange_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_orange_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_young_red_en:yup.string().required(`${CONSTANTS[lang].recommendedValidText}`),
+      // rec_old_red_en: yup.string().required(`${CONSTANTS[lang].recommendedValidText}`)
   });
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema)
@@ -58,9 +58,8 @@ const TableAxesEdit = (props) => {
   const onSubmit = (data) => {
     // let err = false;
     // e.preventDefault();
-    let payload = {...data}
-    payload.file = data.file[0]
-    console.log(payload)
+
+    console.log(data)
     // history.push("/glossary");
     // const { createGlossary } = props;
     // createGlossary(publication);
@@ -80,7 +79,7 @@ const TableAxesEdit = (props) => {
   //   }
   // };
   const [langTab,setLangTab] = useState('ru')
-  console.log(langTab)
+
   return (
     <div className="content content-profile">
 
@@ -96,7 +95,7 @@ const TableAxesEdit = (props) => {
                 <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                 {errors.rec_young_green_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_green_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.young?.greenRu && axes?.recommendation?.young?.greenRu}
                     id='rec_young_green_ru'
                     name='rec_young_green_ru'
                     type="textarea"
@@ -109,7 +108,7 @@ const TableAxesEdit = (props) => {
                 <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                 {errors.rec_old_green_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_green_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.old?.greenRu && axes?.recommendation?.old?.greenRu}
                     id='rec_old_green_ru'
                     name='rec_old_green_ru'
                     type="textarea"
@@ -123,7 +122,7 @@ const TableAxesEdit = (props) => {
                 <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                 {errors.rec_young_orange_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_orange_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.young?.orangeRu && axes?.recommendation?.young?.orangeRu}
                     id='rec_young_orange_ru'
                     name='rec_young_orange_ru'
                     type="textarea"
@@ -134,7 +133,7 @@ const TableAxesEdit = (props) => {
                 <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange}${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                  {errors.rec_old_orange_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_orange_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.old?.orangeRu && axes?.recommendation?.old?.orangeRu}
                     id='rec_old_orange_ru'
                     name='rec_old_orange_ru'
                     type="textarea"
@@ -146,7 +145,7 @@ const TableAxesEdit = (props) => {
                 <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                     {errors.rec_young_red_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_young_red_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.young?.redRu && axes?.recommendation?.young?.redRu}
                     id='rec_young_red_ru'
                     name='rec_young_red_ru'
                     type="textarea"
@@ -157,7 +156,7 @@ const TableAxesEdit = (props) => {
                 <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                   {errors.rec_old_red_ru?.type === 'required' &&<div> <p className="invalid-text inv-m animated fadeInDown">{errors.rec_old_red_ru?.message}</p></div>}
                 <textarea
-                    defaultValue={publication?.subject_en && publication?.subject_en}
+                    defaultValue={axes?.recommendation?.old?.redRu && axes?.recommendation?.old?.redRu}
                     id='rec_old_red_ru'
                     name='rec_old_red_ru'
                     type="textarea"
@@ -171,7 +170,7 @@ const TableAxesEdit = (props) => {
                 <div className="input-groups b-grey ">
                   <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.young?.greenEng && axes?.recommendation?.young?.greenEng}
                       id='rec_young_green_en'
                       name='rec_young_green_en'
                       type="textarea"
@@ -182,7 +181,7 @@ const TableAxesEdit = (props) => {
                   {errors.subject_en?.type === 'required' && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].subjectValid}</p>}
                   <div className="label green">{`${CONSTANTS[lang].recommendedHeaderGreen} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.old?.greenEng && axes?.recommendation?.old?.greenEng}
                       id='rec_old_green_en'
                       name='rec_old_green_en'
                       type="textarea"
@@ -195,7 +194,7 @@ const TableAxesEdit = (props) => {
                 <div className="input-groups b-grey ">
                   <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.young?.orangeEng && axes?.recommendation?.young?.orangeEng}
                       id='rec_young_orange_en'
                       name='rec_young_orange_en'
                       type="textarea"
@@ -206,7 +205,7 @@ const TableAxesEdit = (props) => {
                   {errors.name_ru?.message && <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].nameValid}</p>}
                   <div className="label orange">{`${CONSTANTS[lang].recommendedHeaderOrange}${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.old?.orangeEng && axes?.recommendation?.old?.orangeEng}
                       id='rec_old_orange_en'
                       name='rec_old_orange_en'
                       type="textarea"
@@ -219,7 +218,7 @@ const TableAxesEdit = (props) => {
                 <div className="input-groups b-grey " >
                   <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].young}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.young?.redEng && axes?.recommendation?.young?.redEng}
                       id='rec_young_red_en'
                       name='rec_young_red_en'
                       type="textarea"
@@ -230,7 +229,7 @@ const TableAxesEdit = (props) => {
                   {errors.author_en?.message &&  <p className="invalid-text animated fadeInDown">{CONSTANTS[lang].authorValid}</p>}
                   <div className="label red">{`${CONSTANTS[lang].recommendedHeaderRed} ${CONSTANTS[lang].for} ${CONSTANTS[lang].old}`}</div>
                   <textarea
-                      defaultValue={publication?.subject_en && publication?.subject_en}
+                      defaultValue={axes?.recommendation?.old?.redEng && axes?.recommendation?.old?.redEng}
                       id='rec_old_red_en'
                       name='rec_old_red_en'
                       type="textarea"

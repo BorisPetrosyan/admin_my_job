@@ -557,7 +557,22 @@ form .input-groups {
 	margin-bottom: -1px;
 	margin-top: -11px;
 }
+.td-sc {
 
+	max-width: 95px;
+	max-height: 75px;
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis
+}
+.pos-r {
+	position: relative;
+}
+.td-sc:first-child {
+	max-width: 205px; white-space: unset;
+	overflow: unset;
+	text-overflow: unset;
+	font-size: 14px;
+
+}
 .invalid-border {
 	border: 1px solid #fc4949!important;
 

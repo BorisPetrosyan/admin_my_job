@@ -11,6 +11,7 @@ import {
   useGlobalFilter,
     useRowSelect
 } from "react-table";
+import ToolTip from "../office/axes/bxk";
 
 const pageSizeOptions = [5, 10, 20, 30, 40, 50, 100];
 
@@ -150,6 +151,11 @@ const Table = ({
     fetchData({ pageIndex, pageSize });
   }, [fetchData, pageIndex, pageSize, ...deps]);
 
+  const threeDote = (source,size) => {
+    console.log(source.length > size ? source.slice(0, size - 1) + "…" : source)
+    return source.length > size ? source.slice(0, size - 1) + "…" : source;
+  }
+
   return (
     <div>
       <span className="hide_for_diagnostics">{headerText}&nbsp;</span>
@@ -216,12 +222,15 @@ const Table = ({
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
+
             prepareRow(row);
             return (
               <tr {...row.getRowProps([getRowProps(row)])}>
+
                 {row.cells.map((cell) => {
+
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td className={`${tableType === 'axes s' ? 'td-sc': 'pos-r'} `} {...cell.getCellProps()}>{ <ToolTip cell={cell} />}{cell.render("Cell")}</td>
                   );
                 })}
               </tr>
